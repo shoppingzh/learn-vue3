@@ -4,7 +4,7 @@
       {{ data.label }}
     </div>
     <div class="item__actions">
-      <div class="item__action" @click="handleRemove">x</div>
+      <div class="item__action" @click="handleRemove"><i class="icon-shanchu" /></div>
     </div>
   </div>
 </template>
@@ -41,7 +41,7 @@ export default {
     cursor: pointer;
     transition: all .3s ease-in-out;
     &:hover {
-      transform: scale(1.02);
+      background-color: #eee;
     }
     & + & {
       margin-top: 12px;
