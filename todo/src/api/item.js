@@ -2,7 +2,8 @@ import { get, save } from '@/utils/store'
 
 export function list() {
   return new Promise((resolve) => {
-    resolve(get('items'))
+    const items = get('items') || []
+    resolve(items)
   })
 }
 
@@ -20,7 +21,10 @@ export function add(data) {
     data.createTime = +new Date()
     items.push(data)
     save('items', items)
-    resolve(data)
+    // 模拟网络请求
+    setTimeout(() => {
+      resolve(data)
+    }, Math.random() * 3000);
   })
 }
 
@@ -33,5 +37,16 @@ export function remove(id) {
     items.splice(idx, 1)
     save('items', items)
     resolve(item)
+  })
+}
+
+export function toggleDone(id, done = false) {
+  return new Promise((resolve, reject) => {
+    const items = get('items') || []
+    const item = items.find(o => o.id === id)
+    if (!item) return reject('没有找到该待办')
+    item.done = done
+    save('items', items)
+    resolve()
   })
 }
